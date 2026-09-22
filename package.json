@@ -1,0 +1,30 @@
+{
+  "name": "vetly-company-backend",
+  "version": "1.0.0",
+  "description": "vetly company website",
+  "keywords": [
+    "javascript",
+    "backend",
+    "vetly"
+  ],
+  "homepage": "https://github.com/Mikerotems/Vetly-Company-Backend#readme",
+  "bugs": {
+    "url": "https://github.com/Mikerotems/Vetly-Company-Backend/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mikerotems/Vetly-Company-Backend.git"
+  },
+  "license": "ISC",
+  "author": "Michael Oluwarotimi",
+  "type": "commonjs",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^5.2.1",
+    "nodemon": "^3.1.14"
+  }
+}
