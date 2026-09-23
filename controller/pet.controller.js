@@ -38,10 +38,17 @@ const createPet = async (req, res) =>{
     } 
 }
 
-const getAllPets = async (req, res) =>{
-    const pets = await petSchema.find();
-    return res.status(200).json(pets);
-}
+const getAllPets = async (req, res) => {
+    try {
+        const pets = await petModel.find();
+        return res.status(200).json(pets);
+    } 
+    catch (error) {
+        return res.status(500).json({
+            message: "Failed to retrieve pets",
+            error: error.message,
+});
+}};
 
 const updatePet = async (req, res) => {
     try{
@@ -108,6 +115,7 @@ const buyPet = async (req, res) =>{
     }
 
 };
+
 const deletePet = async (req, res) =>{
     try{
         const { id }= req.params;

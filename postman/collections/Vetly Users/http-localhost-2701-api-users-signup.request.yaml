@@ -1,0 +1,15 @@
+$kind: http-request
+name: http://localhost:2701/api/users/signup
+description: ""
+url: http://localhost:2701/api/users/login
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \    \"email\" : \"millie@gmail.com\",\r
+
+    \    \"password\" : \"dhgwedf\"\r
+
+    }"
+order: 1790180082232

@@ -1,8 +1,8 @@
-const express = ("express");
+const express = require ("express");
 const userRouter = express.Router();
-const multer = require("multer");
-const { createUser, loginUser, getAllPets } = require("../controller/user.controller");
+const { createUser, loginUser} = require("../controller/user.controller");
 const authenticate = require("../middleware/auth.middleware");
+const { getAllPets } = require("../controller/pet.controller");
 
 
 userRouter.post("/signup", createUser);

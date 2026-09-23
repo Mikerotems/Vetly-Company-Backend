@@ -41,13 +41,15 @@ const createUser = async (req, res) =>{
         });
         return res.status(201).json(newUser);
 
-    } catch (err) {
-        next(err)
     } 
+    catch (err) {
+        console.log("error creating user");
+        } 
   }
 
   const loginUser = async (req, res) => {
-    const { email, password } = req.body;
+    try{
+        const { email, password } = req.body;
 
 
     if (!email) {
@@ -55,7 +57,7 @@ const createUser = async (req, res) =>{
     }
 
 
-    let userExist = await userModel.findOne({ email }); //.select("password");
+    const userExist = await userModel.findOne({ email }); 
 
 
     if (!userExist) {
@@ -74,11 +76,17 @@ const createUser = async (req, res) =>{
     }
 
     const payload = { id: userExist._id, email: userExist.email }
-    const accessToken = jwt.sign(payload, process.env.JWT_KEY, {
+    const accessToken = jwt.sign(payload, process.env.JWT_SECRET, {
         expiresIn:
             "3m"
     }); 
     return res.status(200).json(accessToken);
 }
-
+catch (error) {
+    console.log(error.message);
+    return res.status(500).json({
+        message: "Internal server error"
+    });
+}
+  }
 module.exports = { createUser, loginUser };

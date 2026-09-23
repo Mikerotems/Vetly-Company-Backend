@@ -2,10 +2,10 @@ const express = require("express");
 const petRouter = express.Router();
 
 
-const authenticate = require("../middleware/authMiddleware");
-const authenticateAdmin = require("../middleware/adminMiddleware");
-const upload = require("../middleware/uploadMiddleware");
 const { getAllPets, createPet, updatePet, deletePet, buyPet } = require("../controller/pet.controller");
+const authenticate = require("../middleware/auth.middleware");
+const authenticateAdmin = require("../middleware/admin.middleware");
+const upload = require("../config/multer");
 
 petRouter.post("/create", authenticate, upload.single("picture"), createPet);
 petRouter.get("/all", authenticate, getAllPets);
