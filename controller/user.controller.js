@@ -80,8 +80,5 @@ const createUser = async (req, res) =>{
     }); 
     return res.status(200).json(accessToken);
 }
-const getAllPets = async (req, res) =>{
-    const pets = await petSchema.find();
-    return res.status(200).json(pets);
-}
-module.exports = { createUser, loginUser, getAllPets };
+
+module.exports = { createUser, loginUser };

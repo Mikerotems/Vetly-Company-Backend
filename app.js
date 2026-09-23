@@ -4,19 +4,25 @@ const dotenv = require("dotenv");
 const cors = require("cors");
 const { handleUpload, cloudinary } = require("./config/cloudinary");
 const multer = require("multer");
-const axios = require("axios");
 const { v2 } = require("cloudinary");
 const upload = require("./config/multer");
+const {userRouter, petRouter} = require("./routes/user.routes");
+const createAdmin = require("./seeder/adminSeeder");
 
 dotenv.config();
 
 const app = express();
 
+
+createAdmin();
+
 // middlewares
 app.use(express.json());
 app.use(cors());
 app.use(multer);
-app.use(axios);
+app.use("/users", userRouter);
+app.use("/pets", petRouter);
+
 
 // cloudinary middleware 
 app.post("/upload", upload.single("my_file"), async (req, res) => {

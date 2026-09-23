@@ -38,23 +38,76 @@ const createPet = async (req, res) =>{
     } 
 }
 
+const getAllPets = async (req, res) =>{
+    const pets = await petSchema.find();
+    return res.status(200).json(pets);
+}
+
 const updatePet = async (req, res) => {
     try{
-    const petId = req.params.id; 
-    const updatedPet = await petModel.findByIdAndUpdate(
-        petId, req.body, {new:true, runValidators: true});
-    if (!updatedPet) {
-        return res.status(404).json("pet not found");
-    }
-    return res.status(200),json({
-        message: "pet updated successfully",
-        pet : updatedPet   
-     })
-    }
-    catch (error){
-        return res.status(500).json("error updating pet");
-}};
+        const { id } = req.params;
+        const  { breed, age, picture, cost, quantity } = req.body;
+        const pet = await petModel.findById(id);
+        
+        if (!pet) {return res.status(404).json({message: "Pet not found"});
+        }
+        if (breed) {
+            pet.breed = breed
+        }
+        if (age) {
+            pet.age = age;
+        }
+        if (picture) {
+            pet.picture = picture;
+        }
+        if (cost) {
+            pet.cost = cost;
+        }
+         if (quantity !== undefined) {
+            pet.quantity = quantity;
+        }
+        await pet.save();
 
+        return res.status(200).json({message: "pet updated successfully",
+            data: pet
+        });
+    }catch(error){
+        console.log(error.message);
+        return res.status(500).json({message: "Error updating pet"});
+    }
+}
+
+const buyPet = async (req, res) =>{
+    try{
+        const { breed } = req.body;
+
+        if(!breed){
+            return res.status(400).json({message: "Breed Name is required"});
+        }
+
+        const pet = await petModel.findOne({breedName});
+
+        if(!pet){
+            return res.status(404).json({message: "Pet not found"});
+        }
+
+        if(pet.quantity == 0){
+            return res.status(400).json({message: "Pet is out of stock"});
+        }
+
+        pet.quantity = pet.quantity -1;
+        await pet.save();
+
+        return res.status(200).json({message: "Pet purchased successfully",
+            data: pet
+        });
+
+    }catch(error){
+       console.log(error.message);
+        return res.status(500).json({message: "error purchasing pet"});
+    }
+
+};
 const deletePet = async (req, res) =>{
     try{
         const { id }= req.params;
@@ -71,4 +124,5 @@ const deletePet = async (req, res) =>{
             message: "Error deleting pet", error: error.message});
         }
     }
-module.exports = { createPet, updatePet, deletePet };
+
+module.exports = { createPet, getAllPets, updatePet, buyPet, deletePet };
