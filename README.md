@@ -506,4 +506,6 @@ This backend currently supports:
 - Pet purchase
 - Admin-only pet deletion
 
-If you want, this README can also be expanded into a fully branded API documentation page with a table of all routes, sample curl commands, and a Postman collection export section.
+If you want, this README can also be expanded into a fully branded API documentation page with a table of all routes, sample curl commands, and a Postman collection export section
+
+Author: Oluwarotimi
