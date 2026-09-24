@@ -8,17 +8,17 @@ body:
   content:
     - type: text
       key: breed
-      value: weagle
+      value: maine_coon_cat
       description: ""
       disabled: false
     - type: text
       key: age
-      value: "10"
+      value: 2 months
       description: ""
       disabled: false
     - type: text
       key: cost
-      value: "400"
+      value: $150
       description: ""
       disabled: false
     - type: text
@@ -29,7 +29,7 @@ body:
     - type: file
       key: picture
       src:
-        - postman-cloud:///1f1b80b5-6446-4530-96c0-f601fa7a9ba3
+        - /C:/Users/USER/OneDrive/Desktop/GitHub/Vetly-Company-Backend/pets/maine_coon_cat.webp
       description: ""
       disabled: false
 auth:
