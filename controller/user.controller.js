@@ -78,9 +78,12 @@ const createUser = async (req, res) =>{
     const payload = { id: userExist._id, email: userExist.email }
     const accessToken = jwt.sign(payload, process.env.JWT_SECRET, {
         expiresIn:
-            "3m"
+            "45m"
     }); 
-    return res.status(200).json(accessToken);
+    return res.status(200).json({
+        message: "Login successful",
+        token: accessToken
+    });
 }
 catch (error) {
     console.log(error.message);
