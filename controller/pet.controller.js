@@ -1,9 +1,11 @@
+const { handleUpload } = require("../config/cloudinary");
 const petModel = require("../models/pet.model");
 
 
 const createPet = async (req, res) =>{
-    const { breed, age, cost, picture} = req.body;
-     try {
+    try {
+        const { breed, age, cost, quantity} = req.body;
+     
         // validation
         if (!breed) {
             return res.status(400).json("please enter the pet breed");
@@ -17,9 +19,12 @@ const createPet = async (req, res) =>{
             return res.status(400).json("cost of pet required");
         }
 
-        if (!picture) {
-            return res.status(400).json("please upload pet's picture");
+        if (!quantity) {
+            return res.status(400).json("please include quantity");
         }
+        //upload image buffer to cloudinary
+        const imageResult = await handleUpload (req.file.buffer);
+
         //several pets can have same age or breed, picture is one of the valid ways to check it's existence
         const petExist = await petModel.findOne({ picture });
         if (petExist) {
@@ -29,12 +34,18 @@ const createPet = async (req, res) =>{
                     breed,
                     age,
                     cost,
-                    picture
+                    quantity,
+                    picture: imageResult.secure_url
                 });
-        return res.status(201).json(newPet);
+        return res.status(201).json({
+            message: "Pet created successfully", newPet});
     }
-      catch (err) {
-        next(err)
+      catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            message: "Unable to create pet",
+            error: error.message
+        });
     } 
 }
 

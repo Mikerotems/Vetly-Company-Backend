@@ -1,0 +1,39 @@
+$kind: http-request
+name: http://localhost:2701/api/pets/create
+description: ""
+url: http://localhost:2701/api/pets/create
+method: POST
+body:
+  type: formdata
+  content:
+    - type: text
+      key: breed
+      value: weagle
+      description: ""
+      disabled: false
+    - type: text
+      key: age
+      value: "10"
+      description: ""
+      disabled: false
+    - type: text
+      key: cost
+      value: "400"
+      description: ""
+      disabled: false
+    - type: text
+      key: quantity
+      value: "1"
+      description: ""
+      disabled: false
+    - type: file
+      key: picture
+      src:
+        - postman-cloud:///1f1b80b5-6446-4530-96c0-f601fa7a9ba3
+      description: ""
+      disabled: false
+auth:
+  type: bearer
+  credentials:
+    token: "{{json_web_token_0btn}}"
+order: 1790250309573

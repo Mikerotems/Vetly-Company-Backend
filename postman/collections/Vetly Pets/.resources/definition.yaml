@@ -1,0 +1,6 @@
+$kind: collection
+name: Vetly Pets
+variables:
+  - key: json_web_token_0btn
+    secret: true
+    disabled: false

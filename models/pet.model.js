@@ -7,7 +7,7 @@ const petSchema = new mongoose.Schema({
     cost : {type: String, required: true},
     picture : {type: String, required: true},
     quantity : {type: Number, required: true}
-}, {timestamp: true}) 
+}, {timestamps: true}) 
 
 const petModel = mongoose.model("pet", petSchema);
 
